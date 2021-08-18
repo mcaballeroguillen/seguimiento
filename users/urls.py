@@ -4,7 +4,7 @@ from django.urls import path
 from .views import  LogoutView, UserLoginView, Paso
 
 
-app_name = 'usuarios'
+app_name = 'users'
 
 urlpatterns = [
     path(

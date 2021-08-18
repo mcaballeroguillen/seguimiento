@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import Paso
+from .views import Paso, Paso1
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',Paso.as_view()),
-path('accounts/', include('users.urls', namespace='users')),
+    path('accounts/profile/', Paso1.as_view()),
+    path('users/', include('users.urls', namespace='users')),
+    path('lineabase/', include('LineaBase.urls')),
 ]

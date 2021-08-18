@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 
 class UserLoginView(LoginView):
-    template_name='usuarios/user_login.html'
+    template_name='login.html'
     redirect_authenticated_user = True
 
 
