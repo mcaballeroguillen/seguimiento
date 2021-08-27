@@ -1,6 +1,8 @@
 from django import  forms
+from .models import Linea_Base
 
-class Pregunta_form(forms.Form):
-    Tipo= forms.CharField(max_length=10)
-    Enunciado = forms.CharField(max_length=100)
-    Opciones = forms.CharField(max_length=100)
+class Linea_Base(forms.ModelForm):
+    class Meta:
+        model = Linea_Base
+        fields = ("Usuario","Xml","Nombre_proyecto","Nombre_encuesta")
+

@@ -1,0 +1,74 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>Prueba_1</h:title>
+    <model>
+      <instance>
+        <data id="build_Prueba-1_1630011903">
+          <meta>
+            <instanceID/>
+          </meta>
+          <Nombre/>
+          <Edad/>
+          <Fecha/>
+          <Ubicacion/>
+          <Foto/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/Nombre:label">
+            <value>Nombre </value>
+          </text>
+          <text id="/data/Edad:label">
+            <value>Edad</value>
+          </text>
+          <text id="/data/Edad:hint">
+            <value></value>
+          </text>
+          <text id="/data/Fecha:label">
+            <value>Fecha</value>
+          </text>
+          <text id="/data/Fecha:hint">
+            <value></value>
+          </text>
+          <text id="/data/Ubicacion:label">
+            <value>Ubicación</value>
+          </text>
+          <text id="/data/Foto:label">
+            <value>Foto</value>
+          </text>
+          <text id="/data/Foto:hint">
+            <value></value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <submission method="form-data-post" action="https://docs.google.com/spreadsheets/d/1wNiyN9nleqxLd-FNZMKsfK8k9LMlOxTPUB8JV-DcfGk/edit?usp=sharing"/>
+      <bind nodeset="/data/Nombre" type="string" required="true()" calculate="mcaballero"/>
+      <bind nodeset="/data/Edad" type="int" required="true()" calculate="mcaballero"/>
+      <bind nodeset="/data/Fecha" type="date" required="true()" calculate="mcaballero"/>
+      <bind nodeset="/data/Ubicacion" type="geopoint"/>
+      <bind nodeset="/data/Foto" type="binary"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/data/Nombre">
+      <label ref="jr:itext('/data/Nombre:label')"/>
+    </input>
+    <input ref="/data/Edad">
+      <label ref="jr:itext('/data/Edad:label')"/>
+      <hint ref="jr:itext('/data/Edad:hint')"/>
+    </input>
+    <input ref="/data/Fecha">
+      <label ref="jr:itext('/data/Fecha:label')"/>
+      <hint ref="jr:itext('/data/Fecha:hint')"/>
+    </input>
+    <input ref="/data/Ubicacion" appearance="maps">
+      <label ref="jr:itext('/data/Ubicacion:label')"/>
+    </input>
+    <upload ref="/data/Foto" mediatype="image/*">
+      <label ref="jr:itext('/data/Foto:label')"/>
+      <hint ref="jr:itext('/data/Foto:hint')"/>
+    </upload>
+  </h:body>
+</h:html>
