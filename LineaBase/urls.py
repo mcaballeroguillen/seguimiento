@@ -1,5 +1,7 @@
-from django.urls import path
-from .views import nueva_pregunta
+from django.urls import path, re_path
+from .views import Crear_Linea
+app_name = 'lineabase'
 urlpatterns = [
-    path('nueva_pregunta/',nueva_pregunta),
+    path('crear/',Crear_Linea.as_view(),name="crear"),
+
 ]

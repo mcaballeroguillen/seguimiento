@@ -5,4 +5,4 @@ class Paso(TemplateView):
     template_name = 'index.html'
 
 class Paso1(TemplateView):
-    template_name = 'home.html'
+    template_name = 'Lineas_Base/Index.html'

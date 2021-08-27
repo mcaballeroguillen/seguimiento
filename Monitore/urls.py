@@ -18,8 +18,8 @@ from django.urls import path, include
 from .views import Paso, Paso1
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',Paso.as_view()),
+    path('',Paso.as_view(), name ='inicio'),
     path('accounts/profile/', Paso1.as_view()),
     path('users/', include('users.urls', namespace='users')),
-    path('lineabase/', include('LineaBase.urls')),
+    path('lineabase/', include('LineaBase.urls', namespace='lineabase')),
 ]
