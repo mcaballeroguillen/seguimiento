@@ -23,6 +23,9 @@
                     <h2>Crear Linea Base</h2>
                 </div>
             </div>
+                <center>
+                <div class="row">
+                    <div class="col-12">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ formulario.as_p }}
@@ -30,6 +33,9 @@
                     <button class="btn" type="submit" id="sendMessageButton">Cargar</button>
                     </div>
                 </form>
+                    </div>
+                    </div>
+                    </center>
             </div>
         </div>
         <!-- Single Page End -->
