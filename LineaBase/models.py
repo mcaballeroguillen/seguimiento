@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 
 # Create your models here.
@@ -12,3 +14,20 @@ class Linea_Base(models.Model):
     Xml = models.FileField(upload_to='LineaBase/Xmls')
     Nombre_proyecto = models.CharField(max_length=50)
     Nombre_encuesta = models.CharField(max_length=50)
+    Folder_id = models.CharField(max_length=100)
+    File_Id = models.CharField(max_length=100)
+    File_url = models.CharField(max_length=100)
+
+    def filename(self):
+         return os.path.basename(self.Xml.name)
+
+class Temp_Linea_Base(models.Model):
+    Usuario = models.CharField(max_length=15, default="user0")
+    Xml = models.FileField(upload_to='LineaBase/Xmls')
+    Nombre_proyecto = models.CharField(max_length=50)
+    Nombre_encuesta = models.CharField(max_length=50)
+    Folder_id = models.CharField(max_length=100)
+    File_Id = models.CharField(max_length=100)
+    File_url = models.CharField(max_length=100)
+    def filename(self):
+         return os.path.basename(self.Xml.name)

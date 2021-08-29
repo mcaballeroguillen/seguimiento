@@ -1,0 +1,99 @@
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+  <h:head>
+    <h:title>encuesta</h:title>
+    <model>
+      <instance>
+        <data id="build_encuesta_1630201879">
+          <meta>
+            <instanceID/>
+          </meta>
+          <Nombre/>
+          <Edad/>
+          <Nacimiento/>
+          <Lugar/>
+          <Foto/>
+          <Sexo/>
+        </data>
+      </instance>
+      <itext>
+        <translation lang="English">
+          <text id="/data/Nombre:label">
+            <value>Nombre</value>
+          </text>
+          <text id="/data/Nombre:hint">
+            <value></value>
+          </text>
+          <text id="/data/Edad:label">
+            <value>Edad</value>
+          </text>
+          <text id="/data/Edad:hint">
+            <value></value>
+          </text>
+          <text id="/data/Nacimiento:label">
+            <value>Fecha de Nacimiento</value>
+          </text>
+          <text id="/data/Lugar:label">
+            <value>Posición de la Vivienda</value>
+          </text>
+          <text id="/data/Foto:label">
+            <value>Foto</value>
+          </text>
+          <text id="/data/Foto:hint">
+            <value></value>
+          </text>
+          <text id="/data/Sexo:label">
+            <value>Sexo</value>
+          </text>
+          <text id="/data/Sexo:hint">
+            <value></value>
+          </text>
+          <text id="/data/Sexo:option0">
+            <value>F</value>
+          </text>
+          <text id="/data/Sexo:option1">
+            <value>M</value>
+          </text>
+        </translation>
+      </itext>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
+      <bind nodeset="/data/Nombre" type="string"/>
+      <bind nodeset="/data/Edad" type="int"/>
+      <bind nodeset="/data/Nacimiento" type="date"/>
+      <bind nodeset="/data/Lugar" type="geopoint"/>
+      <bind nodeset="/data/Foto" type="binary"/>
+      <bind nodeset="/data/Sexo" type="select1"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/data/Nombre">
+      <label ref="jr:itext('/data/Nombre:label')"/>
+      <hint ref="jr:itext('/data/Nombre:hint')"/>
+    </input>
+    <input ref="/data/Edad">
+      <label ref="jr:itext('/data/Edad:label')"/>
+      <hint ref="jr:itext('/data/Edad:hint')"/>
+    </input>
+    <input ref="/data/Nacimiento">
+      <label ref="jr:itext('/data/Nacimiento:label')"/>
+    </input>
+    <input ref="/data/Lugar" appearance="maps">
+      <label ref="jr:itext('/data/Lugar:label')"/>
+    </input>
+    <upload ref="/data/Foto" mediatype="image/*" appearance="new">
+      <label ref="jr:itext('/data/Foto:label')"/>
+      <hint ref="jr:itext('/data/Foto:hint')"/>
+    </upload>
+    <select1 ref="/data/Sexo">
+      <label ref="jr:itext('/data/Sexo:label')"/>
+      <hint ref="jr:itext('/data/Sexo:hint')"/>
+      <item>
+        <label ref="jr:itext('/data/Sexo:option0')"/>
+        <value>F</value>
+      </item>
+      <item>
+        <label ref="jr:itext('/data/Sexo:option1')"/>
+        <value>M</value>
+      </item>
+    </select1>
+  </h:body>
+</h:html>

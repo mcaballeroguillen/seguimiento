@@ -3,7 +3,7 @@
     <h:title>Prueba_1</h:title>
     <model>
       <instance>
-        <data id="build_Prueba-1_1630011903">
+        <data id="build_Prueba-1_1630011646">
           <meta>
             <instanceID/>
           </meta>
@@ -43,7 +43,6 @@
         </translation>
       </itext>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
-      <submission method="form-data-post" action="https://docs.google.com/spreadsheets/d/1wNiyN9nleqxLd-FNZMKsfK8k9LMlOxTPUB8JV-DcfGk/edit?usp=sharing"/>
       <bind nodeset="/data/Nombre" type="string" required="true()" calculate="mcaballero"/>
       <bind nodeset="/data/Edad" type="int" required="true()" calculate="mcaballero"/>
       <bind nodeset="/data/Fecha" type="date" required="true()" calculate="mcaballero"/>

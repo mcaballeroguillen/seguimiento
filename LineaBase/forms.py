@@ -1,8 +1,12 @@
 from django import  forms
-from .models import Linea_Base
+from .models import Temp_Linea_Base
 
-class Linea_Base(forms.ModelForm):
+class Linea_Base_form(forms.ModelForm):
+
     class Meta:
-        model = Linea_Base
+        model = Temp_Linea_Base
         fields = ("Xml","Nombre_proyecto","Nombre_encuesta")
+
+
+
 
