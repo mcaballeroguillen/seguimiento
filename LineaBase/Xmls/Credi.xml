@@ -59,7 +59,7 @@
           </text>
         </translation>
       </itext>
-<submission method="form-data-post" action="https://docs.google.com/spreadsheets/d/1b0dbQDN-qUZM4Izdboh8-rrtNgkx4E5qfqOYeLVwZ4I/edit?usp=drivesdk"/
+<submission method="form-data-post" action="https://docs.google.com/spreadsheets/d/1_CyR-u8rRTwy84Pty6yjIQ8VSfMVWxXRHuBULG11oj0/edit?usp=drivesdk"/
 >      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
       <bind nodeset="/data/Nombre" type="string" required="true()" calculate="mcaballero"/>
       <bind nodeset="/data/Edad" type="int" required="true()" calculate="mcaballero"/>

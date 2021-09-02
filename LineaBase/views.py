@@ -33,7 +33,8 @@ class Drive_manage (TemplateView):
         self.drive = "s"
     def autenticar(self):
             ga = GoogleAuth()
-            ga.LocalWebserverAuth()
+            #ga.LocalWebserverAuth()
+            ga.LoadCredentialsFile("mycreds.txt")
             self.drive= ga
 
     def crear_carpeta(self):
@@ -103,14 +104,6 @@ class Drive_manage (TemplateView):
         A.Upload()
         datos.File_Id = A['id']
 
-    def mover_arcjivo(self):
-        dr = GoogleDrive(self.drive)
-        datos = Temp_Linea_Base.objects.get(Usuario=self.request.user.username)
-        Fi_id = datos.File_Id
-        Fo_if = datos.Folder_id
-        A= dr.CreateFile({'id': Fi_id})
-
-        A.Upload()
 
 
     def get(self, request, *args, **kwargs):
@@ -119,8 +112,9 @@ class Drive_manage (TemplateView):
         self.crear_archivo_excel()
         self.preparar_archivo()
         self.subir_archivo()
-        #self.mover_arcjivo()
+
 
         return redirect("lineabase:crear")
+
 
 
