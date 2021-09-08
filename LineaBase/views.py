@@ -5,10 +5,11 @@ from .forms import  Linea_Base_form
 from pydrive.auth import  GoogleAuth
 from pydrive.drive import GoogleDrive
 from .models import Temp_Linea_Base, Linea_Base
+from .utils.xform_tools import formversion_pyxform
 
 # Create your views here.
 
-class Crear_Linea(TemplateView):
+class Subir_Linea(TemplateView):
 
 
     def post(self,request, *args, **kwargs):
@@ -82,7 +83,7 @@ class Drive_manage (TemplateView):
         lineas = f.readlines()
         for linea in lineas:
             l = str(linea)
-            if "</itext>" in l:
+            if "</instance>" in l:
                 archivo.write(l)
                 nueva_l = "<submission method=\"form-data-post\" action=\""+ datos.File_url+ "\"/\n>"
                 archivo.write(nueva_l)
@@ -114,7 +115,35 @@ class Drive_manage (TemplateView):
         self.subir_archivo()
 
 
-        return redirect("lineabase:crear")
+        return redirect("subir")
 
 
 
+class Crear_Encuesta(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        pyxform_survey = formversion_pyxform({
+            'survey': [
+                {'type': 'text',
+                 'name': 'q1',
+                 'label': 'text question'},
+                {'type': 'select_one colors',
+                 'name': 'color',
+                 'label': 'color'}
+            ],
+            'choices': [
+                {'list_name': 'colors', 'value': 'red', 'label': 'Red'},
+                {'list_name': 'colors', 'value': 'blue', 'label': 'Blue'},
+            ],
+            'settings': {'id_string': 'simple',
+                         'title': 'simple example xform',
+                         'name': 'data'}
+        })
+
+        print(
+            pyxform_survey.to_xml()
+        )
+
+        file = "LineaBase/Xmls/"+"prueba"+".xml"
+        f = open(file,'w')
+        f.write(pyxform_survey.to_xml())
