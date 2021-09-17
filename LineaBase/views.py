@@ -6,6 +6,8 @@ from pydrive.auth import  GoogleAuth
 from pydrive.drive import GoogleDrive
 from .models import Temp_Linea_Base, Linea_Base, Temp_Pregunta
 from .utils.xform_tools import formversion_pyxform
+from graphos.sources.simple import SimpleDataSource
+from graphos.renderers.gchart import LineChart
 
 
 # Create your views here.
@@ -182,3 +184,20 @@ class Nueva_Pregunta(TemplateView):
             n.save()
 
 
+
+class Graficos(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        data = [
+            ['Year', 'Sales', 'Expenses'],
+            [2004, 1000, 400],
+            [2005, 1170, 460],
+            [2006, 660, 1120],
+            [2007, 1030, 540]
+        ]
+        # DataSource object
+        data_source = SimpleDataSource(data=data)
+        # Chart object
+        chart = LineChart(data_source)
+        context = {'chart': chart}
+        return  render(request,"Lineas_Base/graficos.html",context)

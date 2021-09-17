@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+        <!-- Page Header Start -->
+        <div class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Nueva Linea Base</h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+
+        <!-- Single Page Start -->
+        <div class="single">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Crear Linea Base</h2>
+                </div>
+            </div>
+                <center>
+                <div class="row">
+                    <div class="col-12">
+                    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                    <script type="text/javascript">
+                        google.load("visualization", "1", {packages:["corechart"]});
+                    </script>
+
+                        {{ chart.as_html }}
+                    </div>
+                    </div>
+                    </center>
+            </div>
+        </div>
+        <!-- Single Page End -->
+{% endblock %}
