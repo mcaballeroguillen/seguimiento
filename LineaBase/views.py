@@ -4,8 +4,9 @@ from django.views.generic import TemplateView
 from .forms import  Linea_Base_form
 from pydrive.auth import  GoogleAuth
 from pydrive.drive import GoogleDrive
-from .models import Temp_Linea_Base, Linea_Base
+from .models import Temp_Linea_Base, Linea_Base, Temp_Pregunta
 from .utils.xform_tools import formversion_pyxform
+
 
 # Create your views here.
 
@@ -34,8 +35,8 @@ class Drive_manage (TemplateView):
         self.drive = "s"
     def autenticar(self):
             ga = GoogleAuth()
-            #ga.LocalWebserverAuth()
-            ga.LoadCredentialsFile("mycreds.txt")
+            ga.LocalWebserverAuth()
+            #ga.LoadCredentialsFile("mycreds.txt")
             self.drive= ga
 
     def crear_carpeta(self):
@@ -115,7 +116,7 @@ class Drive_manage (TemplateView):
         self.subir_archivo()
 
 
-        return redirect("subir")
+        return redirect("inicio")
 
 
 
@@ -125,25 +126,59 @@ class Crear_Encuesta(TemplateView):
         pyxform_survey = formversion_pyxform({
             'survey': [
                 {'type': 'text',
-                 'name': 'q1',
-                 'label': 'text question'},
-                {'type': 'select_one colors',
-                 'name': 'color',
-                 'label': 'color'}
+                 'name': 'Nombre',
+                 'label': 'Nombre'},
+                {'type': 'select one sexo',
+                 'name': 'Sexo',
+                 'label': 'Sexo'},
+                {'type': 'int',
+                 'name': 'Edad',
+                 'label': 'Edad'},
+                {'type': 'location',
+                 'name': 'Posicion',
+                 'label': 'Posicion'},
+
+
             ],
             'choices': [
-                {'list_name': 'colors', 'value': 'red', 'label': 'Red'},
-                {'list_name': 'colors', 'value': 'blue', 'label': 'Blue'},
+                {'list_name': 'sexo', 'value': 'F', 'label': 'Femenino'},
+                {'list_name': 'sexo', 'value': 'M', 'label': 'Masculino'},
             ],
             'settings': {'id_string': 'simple',
-                         'title': 'simple example xform',
+                         'title': 'Ejemplo_1',
                          'name': 'data'}
         })
 
-        print(
-            pyxform_survey.to_xml()
-        )
+
 
         file = "LineaBase/Xmls/"+"prueba"+".xml"
         f = open(file,'w')
         f.write(pyxform_survey.to_xml())
+
+        return  redirect("lineabase:subir")
+
+
+class Nueva_Pregunta(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "Lineas_Base/Nueva_Pregunta.html")
+
+    def post(self,request,*args,**kwargs):
+        Tipo_Pregunta = request.POST['Tipo_q']
+        Enunciado = request.POST['Enunciado']
+        Opciones = request.POST['Opciones']
+        # Agregar validación
+
+        c = Temp_Pregunta.objects.filter(Usuario=request.user.username).count()
+
+        if Tipo_Pregunta == 'text':
+            n = Temp_Pregunta(
+                Usuario= request.user.username,
+                Num= c +1,
+                Tipo='text',
+                Enunciado = Enunciado,
+                Opciones =Opciones
+            )
+            n.save()
+
+
