@@ -4,10 +4,11 @@ from django.views.generic import TemplateView
 from .forms import  Linea_Base_form
 from pydrive.auth import  GoogleAuth
 from pydrive.drive import GoogleDrive
-from .models import Temp_Linea_Base, Linea_Base, Temp_Pregunta
+from .models import Temp_Linea_Base, Linea_Base, Temp_Pregunta, Datos_Encuestas
 from .utils.xform_tools import formversion_pyxform
 from graphos.sources.simple import SimpleDataSource
-from graphos.renderers.gchart import LineChart
+from graphos.renderers.gchart import LineChart, BarChart
+
 
 
 # Create your views here.
@@ -186,18 +187,30 @@ class Nueva_Pregunta(TemplateView):
 
 
 class Graficos(TemplateView):
+    template_name = "Lineas_Base/graficos_form.html"
 
-    def get(self, request, *args, **kwargs):
+    def post(self,request,*args, **kwargs):
+        Num_Encuest = request.POST['Encuesta']
+        Num_Preguta = request.POST['Pregunta']
+        # Agregar Validación
+
         data = [
-            ['Year', 'Sales', 'Expenses'],
-            [2004, 1000, 400],
-            [2005, 1170, 460],
-            [2006, 660, 1120],
-            [2007, 1030, 540]
+            ['Sexo', 'Cantidad', ],
+            ['F', 1000],
+            ['M', 1170],
         ]
+        # Filtrar
+        A = Datos_Encuestas.objects.filter(Encuesta=25, Num_Pregunta=3)
+
         # DataSource object
         data_source = SimpleDataSource(data=data)
         # Chart object
-        chart = LineChart(data_source)
-        context = {'chart': chart}
-        return  render(request,"Lineas_Base/graficos.html",context)
+        chart = BarChart(data_source)
+        context = {'chart': chart,
+                   'Encuesta': Num_Encuest,
+                   'Pregunta': Num_Preguta
+                   }
+        return render(request, "Lineas_Base/graficos.html", context)
+
+
+

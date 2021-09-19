@@ -9,4 +9,5 @@ urlpatterns = [
     path('crear_1/',Crear_Encuesta.as_view(),name='crear'),
     path('nueva_pregutna/', Nueva_Pregunta.as_view(),name='nueva_pregunta'),
     path('graficos/', Graficos.as_view(),name='graficos'),
+
 ]
