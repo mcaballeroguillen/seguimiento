@@ -8,6 +8,7 @@ from .models import Temp_Linea_Base, Linea_Base, Temp_Pregunta, Datos_Encuestas
 from .utils.xform_tools import formversion_pyxform
 from graphos.sources.simple import SimpleDataSource
 from graphos.renderers.gchart import LineChart, BarChart
+import pandas as pd
 
 
 
@@ -211,6 +212,33 @@ class Graficos(TemplateView):
                    'Pregunta': Num_Preguta
                    }
         return render(request, "Lineas_Base/graficos.html", context)
+
+class Excel_to_bd(TemplateView):
+    def get(self, request, *args, **kwargs):
+        df = pd.read_excel('E2.xlsx')
+        dc = {}
+        for n in df:
+            dc[n] = pd.value_counts(df[n])
+        n = 1
+        for i in dc:
+            l = dc[i].index.tolist()
+            l1 = dc[i].tolist()
+            alternativa = str(i).replace('data-', '')
+            if len(l)<=20:
+                for j in range(len(l)):
+                    alternativa1 = str(l[j]).replace('_', ' ')
+                    a = Datos_Encuestas(
+                        Usuario=request.user.username,
+                        Encuesta=3,
+                        Num_Pregunta=n,
+                        Label=alternativa.replace('_', ' '),
+                        Clase=alternativa1,
+                        Frecuencia=int(l1[j])
+                    )
+                    a.save()
+            n=n+1
+        return redirect('lineabase:graficos')
+
 
 
 

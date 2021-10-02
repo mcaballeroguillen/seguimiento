@@ -49,4 +49,4 @@ class Datos_Encuestas(models.Model):
     Num_Pregunta = models.IntegerField()
     Label = models.CharField(max_length=15)
     Clase = models.CharField(max_length=50)
-    Frecuecia = models.IntegerField()
+    Frecuencia = models.IntegerField()
